@@ -1052,21 +1052,27 @@
       <span class="section-meta">三大维度 · 持续沉淀</span>
     </div>
 
+    <!-- 说明 -->
+    <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 20px; margin-bottom: 20px; font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+      这里沉淀的不是摘要，是读完之后真正理解了、形成了自己判断的内容。每篇都有结论、有推理、有观点。
+    </div>
+
     <div class="knowledge-grid">
 
       <!-- 大模型架构 -->
       <div class="knowledge-category">
         <div class="knowledge-category-header" style="border-top: 3px solid var(--accent-arch);">
           <span class="knowledge-category-name" style="color: var(--accent-arch)">大模型架构原理</span>
-          <span class="knowledge-category-count">建设中</span>
+          <span class="knowledge-category-count">1 篇</span>
         </div>
         <div class="knowledge-items">
-          <div class="knowledge-item">Transformer 架构全解</div>
-          <div class="knowledge-item">注意力机制演进：MHA→GQA→MLA</div>
-          <div class="knowledge-item">位置编码：RoPE / ALiBi</div>
-          <div class="knowledge-item">MoE 专家混合架构</div>
-          <div class="knowledge-item">推理优化：KV Cache</div>
-          <div class="knowledge-item">后训练对齐：RLHF / DPO</div>
+          <div class="knowledge-item" style="cursor:pointer; padding: 10px 12px;" onclick="showNote('arch-001')">
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">MLA vs GQA：为什么 DeepSeek 选了一条更难的路？</div>
+            <div style="font-size: 12px; color: var(--text-muted);">KV Cache 内存墙 · 低秩压缩 · 精度 vs 实现复杂度</div>
+          </div>
+          <div class="knowledge-item" style="color: var(--text-muted); font-size: 12px;">MoE 专家混合架构解析 · 待写</div>
+          <div class="knowledge-item" style="color: var(--text-muted); font-size: 12px;">位置编码演进：RoPE / ALiBi / NoPE · 待写</div>
+          <div class="knowledge-item" style="color: var(--text-muted); font-size: 12px;">推理效率：KV Cache / 量化 / 投机解码 · 待写</div>
         </div>
       </div>
 
@@ -1074,15 +1080,16 @@
       <div class="knowledge-category">
         <div class="knowledge-category-header" style="border-top: 3px solid var(--accent-agent);">
           <span class="knowledge-category-name" style="color: var(--accent-agent)">AI Agent 机制</span>
-          <span class="knowledge-category-count">建设中</span>
+          <span class="knowledge-category-count">1 篇</span>
         </div>
         <div class="knowledge-items">
-          <div class="knowledge-item">Agent 架构演进全景</div>
-          <div class="knowledge-item">ReAct / CoT / ToT 推理模式</div>
-          <div class="knowledge-item">MCP 协议与工具调用</div>
-          <div class="knowledge-item">Memory 系统设计模式</div>
-          <div class="knowledge-item">Multi-Agent 协作机制</div>
-          <div class="knowledge-item">AI Coding Agent 实测</div>
+          <div class="knowledge-item" style="cursor:pointer; padding: 10px 12px;" onclick="showNote('agent-001')">
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Agent 协议战争：为什么 MCP 赢了，接下来谁会赢？</div>
+            <div style="font-size: 12px; color: var(--text-muted);">MCP 生态壁垒 · A2A 的未解问题 · AP2 被低估的重要性</div>
+          </div>
+          <div class="knowledge-item" style="color: var(--text-muted); font-size: 12px;">Memory 系统设计模式 · 待写</div>
+          <div class="knowledge-item" style="color: var(--text-muted); font-size: 12px;">Multi-Agent 编排：LangGraph vs A2A · 待写</div>
+          <div class="knowledge-item" style="color: var(--text-muted); font-size: 12px;">AI Coding Agent 实测：Claude Code / Cursor / Devin · 待写</div>
         </div>
       </div>
 
@@ -1090,18 +1097,27 @@
       <div class="knowledge-category">
         <div class="knowledge-category-header" style="border-top: 3px solid var(--accent-industry);">
           <span class="knowledge-category-name" style="color: var(--accent-industry)">AI 行业应用</span>
-          <span class="knowledge-category-count">建设中</span>
+          <span class="knowledge-category-count">1 篇</span>
         </div>
         <div class="knowledge-items">
-          <div class="knowledge-item">医疗 AI 落地现状</div>
-          <div class="knowledge-item">金融 AI：风控与量化</div>
-          <div class="knowledge-item">企业 AI 转型方法论</div>
-          <div class="knowledge-item">AI 原生产品设计模式</div>
-          <div class="knowledge-item">国内外监管政策对比</div>
-          <div class="knowledge-item">AI 落地 ROI 分析框架</div>
+          <div class="knowledge-item" style="cursor:pointer; padding: 10px 12px;" onclick="showNote('industry-001')">
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">试点陷阱：为什么 80% 的企业 AI 投入没有财务回报？</div>
+            <div style="font-size: 12px; color: var(--text-muted);">PwC 2026 · 重构流程 vs 叠加工具 · AI 产品哲学</div>
+          </div>
+          <div class="knowledge-item" style="color: var(--text-muted); font-size: 12px;">AI 原生产品设计模式 · 待写</div>
+          <div class="knowledge-item" style="color: var(--text-muted); font-size: 12px;">企业 AI 转型：成功要素拆解 · 待写</div>
+          <div class="knowledge-item" style="color: var(--text-muted); font-size: 12px;">中国 AI 落地为何领先全球？ · 待写</div>
         </div>
       </div>
 
+    </div>
+
+    <!-- 笔记阅读弹层 -->
+    <div id="note-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; overflow-y:auto; padding:40px 16px;" onclick="if(event.target===this)closeNote()">
+      <div style="max-width:720px; margin:0 auto; background:var(--surface); border-radius:var(--radius-lg); padding:40px; position:relative;">
+        <button onclick="closeNote()" style="position:absolute; top:16px; right:16px; background:var(--surface-2); border:none; border-radius:6px; padding:6px 12px; cursor:pointer; font-size:13px; color:var(--text-secondary);">✕ 关闭</button>
+        <div id="note-content" style="font-size:15px; line-height:1.9; color:var(--text-primary);"></div>
+      </div>
     </div>
   </div>
 
@@ -1285,11 +1301,99 @@
     }, 50);
   }
 
+  // 知识库笔记内容
+  const notes = {
+    'arch-001': {
+      title: 'MLA vs GQA：为什么 DeepSeek 选了一条更难的路？',
+      date: '2026-04-15 | 大模型架构',
+      content: `
+        <h2 style="font-family:'Noto Serif SC',serif;font-size:20px;margin-bottom:8px;">MLA vs GQA：为什么 DeepSeek 选了一条更难的路？</h2>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:24px;font-family:'JetBrains Mono',monospace;">2026-04-15 · 大模型架构</div>
+
+        <div style="background:var(--accent-arch-light);border-left:3px solid var(--accent-arch);padding:12px 16px;border-radius:4px;margin-bottom:24px;font-size:14px;">
+          <strong>结论先行：</strong>MLA 在 KV Cache 压缩率和建模精度上同时优于 GQA，代价是实现复杂度显著上升。DeepSeek 选择 MLA 不是因为它更简单，而是因为在极大规模模型中，KV Cache 的内存墙问题比实现复杂度更致命。
+        </div>
+
+        <h3 style="font-size:15px;font-weight:700;margin:20px 0 8px;">问题背景：KV Cache 是推理的瓶颈</h3>
+        <p style="margin-bottom:12px;color:var(--text-secondary);">自回归生成的本质是：每生成一个 token，都要重新访问之前所有 token 的 Key 和 Value。序列越长，存储这些 KV 的内存开销越大。对于 671B 的 DeepSeek V3，128K 上下文 × 大 batch size = 内存爆炸。这是模型无法服务长上下文的根本原因，不是算力不够，是内存放不下。</p>
+
+        <h3 style="font-size:15px;font-weight:700;margin:20px 0 8px;">GQA 的解法：共享 Key/Value</h3>
+        <p style="margin-bottom:12px;color:var(--text-secondary);">GQA 让多个 Query Head 共用一套 K/V，KV Cache 直接缩小 8 倍。代价是多个 Query Head 用同一套 K/V 做 attention，表达能力有损耗。Llama 2/3 都接受了这个 tradeoff。</p>
+
+        <h3 style="font-size:15px;font-weight:700;margin:20px 0 8px;">MLA 的解法：低秩压缩 KV 投影</h3>
+        <p style="margin-bottom:12px;color:var(--text-secondary);">MLA 不共享，而是压缩——把 K/V 投影到低维潜空间，推理时只缓存压缩向量，计算时临时解压（多一次矩阵乘法）。DeepSeek-V2 消融实验的关键数据点：<strong>MLA 的 perplexity 比 GQA 更低，比 MHA 也略低</strong>。压缩反而提升了建模能力，可能因为低秩分解起到了正则化效果。</p>
+
+        <h3 style="font-size:15px;font-weight:700;margin:20px 0 8px;">我的判断</h3>
+        <p style="margin-bottom:12px;color:var(--text-secondary);">GQA 是工程妥协，MLA 是架构创新。Kimi K2（1T 参数）沿用 MLA，说明这个架构在超大规模下也经受住了验证。GQA 不会消失，但 MLA 会成为旗舰模型的标配。</p>
+      `
+    },
+    'agent-001': {
+      title: 'Agent 协议战争：为什么 MCP 赢了，接下来谁会赢？',
+      date: '2026-04-15 | AI Agent',
+      content: `
+        <h2 style="font-family:'Noto Serif SC',serif;font-size:20px;margin-bottom:8px;">Agent 协议战争：为什么 MCP 赢了，接下来谁会赢？</h2>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:24px;font-family:'JetBrains Mono',monospace;">2026-04-15 · AI Agent</div>
+
+        <div style="background:var(--accent-agent-light);border-left:3px solid var(--accent-agent);padding:12px 16px;border-radius:4px;margin-bottom:24px;font-size:14px;">
+          <strong>结论先行：</strong>MCP 已经是事实标准，这场仗打完了。A2A 是下一个竞争点，但还没有决出胜负。真正被低估但很重要的是 AP2——Agent 自主支付的授权机制。
+        </div>
+
+        <h3 style="font-size:15px;font-weight:700;margin:20px 0 8px;">为什么 MCP 赢得如此彻底？</h3>
+        <p style="margin-bottom:12px;color:var(--text-secondary);">MCP 赢的不是技术更先进，而是生态策略：① 开放协议而非私有 SDK；② Stdio + HTTP 双模式覆盖所有场景；③ 优先覆盖 GitHub、Postgres、Notion 等高价值服务器。6 个月后几百个 MCP Server 形成网络效应，竞争对手难以撼动。教训：协议标准竞争是生态竞争，先覆盖核心节点者胜。</p>
+
+        <h3 style="font-size:15px;font-weight:700;margin:20px 0 8px;">A2A 还没有赢</h3>
+        <p style="margin-bottom:12px;color:var(--text-secondary);">A2A 在技术上很干净，但企业内部 Multi-Agent 场景不需要公开发现；安全机制（认证/计费/访问控制）还不完整；Anthropic 没有明确背书。值得跟踪，但不值得现在梭哈。</p>
+
+        <h3 style="font-size:15px;font-weight:700;margin:20px 0 8px;">AP2 是被低估的关键</h3>
+        <p style="margin-bottom:12px;color:var(--text-secondary);">没有 AP2，企业不敢让 Agent 真正自主执行带金融风险的操作。AP2 的设计本质是把人类的授权意图用密码学固化：IntentMandate（事前设定守卫）→ PaymentMandate（绑定具体订单的凭证）→ PaymentReceipt（不可抵赖的审计链）。这是 Agentic Commerce 从演示到生产的最后一道门。</p>
+
+        <h3 style="font-size:15px;font-weight:700;margin:20px 0 8px;">我的判断</h3>
+        <p style="color:var(--text-secondary);">作为 AI 产品从业者，我更关注 AP2 和 AG-UI 这两层：AP2 决定 Agent 能做多大的事，AG-UI 决定用户怎么跟 Agent 交互。这两层打通了，Agentic 产品才能真正超越「聊天」范式。</p>
+      `
+    },
+    'industry-001': {
+      title: '试点陷阱：为什么 80% 的企业 AI 投入没有财务回报？',
+      date: '2026-04-15 | 行业应用',
+      content: `
+        <h2 style="font-family:'Noto Serif SC',serif;font-size:20px;margin-bottom:8px;">试点陷阱：为什么 80% 的企业 AI 投入没有财务回报？</h2>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:24px;font-family:'JetBrains Mono',monospace;">2026-04-15 · 行业应用</div>
+
+        <div style="background:var(--accent-industry-light);border-left:3px solid var(--accent-industry);padding:12px 16px;border-radius:4px;margin-bottom:24px;font-size:14px;">
+          <strong>结论先行：</strong>大多数企业 AI 投入没有转化为财务收益，不是因为技术不好用，而是战略定位错了——把 AI 当效率工具而不是增长引擎。
+        </div>
+
+        <h3 style="font-size:15px;font-weight:700;margin:20px 0 8px;">数字背后的逻辑</h3>
+        <p style="margin-bottom:12px;color:var(--text-secondary);">PwC 访谈 1,217 名大型上市企业高管。核心发现：74% 的 AI 经济价值被 20% 的企业获取——幂律分布，不是正态分布。头部企业重塑商业模式的概率是同行 2.6 倍，采用自主自优化运营模式的概率高出 1.9 倍，员工对 AI 输出信任度是同行 2 倍。这些差距不是工具数量的差距，是战略意图的差距。</p>
+
+        <h3 style="font-size:15px;font-weight:700;margin:20px 0 8px;">「试点陷阱」是怎么形成的</h3>
+        <p style="margin-bottom:12px;color:var(--text-secondary);">典型路径：试点结果不错 → 尝试推广 → 在这里卡住 → 其他部门数据格式不同、流程不同，规模化成本远超预期 → 停留在试点状态。本质：AI 工具叠加在旧流程上，没有重构工作流本身。就像在马车上装引擎——马还在，路还是土路，引擎发不出力。</p>
+
+        <h3 style="font-size:15px;font-weight:700;margin:20px 0 8px;">我的判断（作为 AI 产品从业者）</h3>
+        <p style="color:var(--text-secondary);">产品经理推 AI 功能时，最大的失败模式不是技术不行，而是只在现有流程里加 AI 入口，没有问「如果用 AI 重新设计这个流程，它应该长什么样？」PwC 报告最有价值的一句话：<em>头部企业重构工作流程以实现将 AI 融入其中，而非简单添加 AI 工具。</em>这是区分「AI 功能」和「AI 产品」的核心分水岭。</p>
+      `
+    }
+  };
+
+  function showNote(id) {
+    const note = notes[id];
+    if (!note) return;
+    document.getElementById('note-content').innerHTML = note.content;
+    document.getElementById('note-modal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeNote() {
+    document.getElementById('note-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNote(); });
+
   // 初始化
   renderCalendar();
   animateCount(document.getElementById('stat-daily'), 1);
   animateCount(document.getElementById('stat-research'), 5);
-  animateCount(document.getElementById('stat-knowledge'), 18);
+  animateCount(document.getElementById('stat-knowledge'), 3);
 </script>
 
 </body>
