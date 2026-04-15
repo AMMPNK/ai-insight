@@ -852,23 +852,18 @@
       <span class="section-meta">精选三大方向每日动态</span>
     </div>
 
-    <!-- 最新周报 -->
-    <div class="weekly-card" onclick="alert('周报功能即将上线')">
-      <div class="weekly-card-label">📅 最新周报</div>
-      <div class="weekly-card-title">AI 洞察 · 本站首刊</div>
-      <div class="weekly-card-meta">三大方向全面启动 · 信息源系统搭建中</div>
-    </div>
-
     <!-- 最新日报卡片 -->
     <div class="daily-grid">
-      <div class="daily-card featured" onclick="alert('日报详情即将上线')">
-        <div class="daily-card-accent" style="background: linear-gradient(90deg, var(--accent-arch), var(--accent-agent))"></div>
+
+      <!-- 创刊号：三方向综述 -->
+      <div class="daily-card featured" id="daily-001">
+        <div class="daily-card-accent" style="background: linear-gradient(90deg, var(--accent-arch), var(--accent-agent), var(--accent-industry))"></div>
         <div>
           <div class="daily-card-date">2026-04-15 · 创刊号</div>
-          <div class="daily-card-title">埃姆的 AI 洞察正式启动</div>
+          <div class="daily-card-title">今日 AI 洞察 No.1 — Agent 协议爆发、LLM 架构比较、PwC AI 收益报告</div>
           <div class="daily-card-preview">
-            聚焦大模型架构原理、AI Agent 机制、AI 行业应用三大方向，建立系统化的技术洞察体系。
-            内容来源涵盖 arXiv 论文、Anthropic/OpenAI 技术博客、GitHub Trending 及国内外优质信息源。
+            Google 发布 6 大 Agent 协议全景指南（MCP/A2A/UCP/AP2/A2UI/AG-UI）；Sebastian Raschka 更新 2026 年大型 LLM 架构对比，MoE + MLA 成主流；
+            PwC《2026 AI 效能研究》显示全球 74% AI 经济价值被 20% 头部企业获取，中国大陆和香港 AI 适配指数全球第一、第二。
           </div>
           <div class="daily-card-tags">
             <span class="tag tag-arch">大模型架构</span>
@@ -881,6 +876,52 @@
           <div class="daily-card-count-label">第 1 期<br>创刊</div>
         </div>
       </div>
+
+      <!-- 大模型架构 -->
+      <div class="daily-card">
+        <div class="daily-card-accent" style="background: var(--accent-arch)"></div>
+        <div class="daily-card-date">大模型架构 · 2026-04-15</div>
+        <div class="daily-card-title">2026 LLM 架构大横评：MoE 主流化，MLA vs GQA 之争落幕</div>
+        <div class="daily-card-preview">
+          Sebastian Raschka 更新综合对比文章，覆盖 DeepSeek V3/R1、Llama 4、Qwen3、Gemma 3、Kimi K2、gpt-oss 等 15+ 架构。核心趋势：① MoE 全面普及（671B 参数 / 37B 激活）；② MLA 压缩 KV Cache 同时超越 GQA 精度；③ Qwen3-Next 引入 Gated DeltaNet 线性注意力混合架构；④ NoPE（无位置编码）在 SmolLM3 中验证可行。
+        </div>
+        <div class="daily-card-tags">
+          <span class="tag tag-arch">MoE</span>
+          <span class="tag tag-arch">MLA</span>
+          <span class="tag tag-arch">架构对比</span>
+        </div>
+      </div>
+
+      <!-- AI Agent -->
+      <div class="daily-card">
+        <div class="daily-card-accent" style="background: var(--accent-agent)"></div>
+        <div class="daily-card-date">AI Agent · 2026-04-15</div>
+        <div class="daily-card-title">Google 发布 6 大 Agent 协议全景：MCP→A2A→UCP→AP2→A2UI→AG-UI</div>
+        <div class="daily-card-preview">
+          Google Developer Blog 以餐厅供应链 Agent 为例，演示 6 个协议如何协同：MCP 连接工具和数据；A2A 实现 Agent 间发现与通信；UCP 标准化商务流程；AP2 提供支付授权审计链；A2UI 动态生成 18 种 UI 原语；AG-UI 将事件流标准化推送至前端。每个协议解决不同层面问题，按需叠加而非全量部署。
+        </div>
+        <div class="daily-card-tags">
+          <span class="tag tag-agent">MCP</span>
+          <span class="tag tag-agent">A2A</span>
+          <span class="tag tag-agent">协议标准化</span>
+        </div>
+      </div>
+
+      <!-- 行业应用 -->
+      <div class="daily-card">
+        <div class="daily-card-accent" style="background: var(--accent-industry)"></div>
+        <div class="daily-card-date">行业应用 · 2026-04-15</div>
+        <div class="daily-card-title">PwC 2026 AI 效能研究：74% 收益被 20% 企业拿走，中国 AI 适配全球第一</div>
+        <div class="daily-card-preview">
+          普华永道访谈 1,217 名高管发现：AI 头部企业将 AI 视为「增长引擎」而非效率工具，重塑商业模式的概率是其他企业 2.6 倍；采用自主自优化运营模式的概率高出同行 1.9 倍。中国大陆在 AI 适配指数排名全球第一，尤其在 AI 应用层面优势突出。差距还在扩大——试点阶段的企业若不转变，差距将持续拉大。
+        </div>
+        <div class="daily-card-tags">
+          <span class="tag tag-industry">行业报告</span>
+          <span class="tag tag-industry">PwC</span>
+          <span class="tag tag-industry">AI 落地</span>
+        </div>
+      </div>
+
     </div>
 
     <!-- 日历 -->
@@ -899,11 +940,22 @@
       </div>
     </div>
 
-    <div class="empty-state">
-      <div class="empty-state-icon">📬</div>
-      <div class="empty-state-text">
-        往期日报正在建立中<br>
-        <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted);">内容将从 arXiv · GitHub · Anthropic Blog 等优质源持续更新</span>
+    <!-- 本期洞察 -->
+    <div style="margin-top: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px;">
+      <div style="font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 700; margin-bottom: 16px;">📌 今日核心洞察</div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <span style="background: var(--accent-arch-light); color: var(--accent-arch); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; white-space: nowrap; margin-top: 2px;">架构</span>
+          <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;">MoE + MLA 已成 2026 年大模型架构事实标准。DeepSeek V3 的设计哲学（256 专家 / 9 激活）正被 Kimi K2（1T 参数）、GLM-4.5（355B）等大规模复制。</div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <span style="background: var(--accent-agent-light); color: var(--accent-agent); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; white-space: nowrap; margin-top: 2px;">Agent</span>
+          <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;">Agent 协议战争进入收尾阶段。Google 用 6 个协议覆盖了从数据接入到 UI 渲染的完整链路，MCP 成为事实工具标准，A2A 成为 Agent 间通信标准。</div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <span style="background: var(--accent-industry-light); color: var(--accent-industry); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; white-space: nowrap; margin-top: 2px;">行业</span>
+          <div style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;">AI 价值分化已是现实。PwC 数据印证：AI 头部企业与普通企业的差距不在工具数量，而在有没有把 AI 嵌入核心商业模式。「试点陷阱」是多数企业正在经历的共同困境。</div>
+        </div>
       </div>
     </div>
   </div>
@@ -924,64 +976,70 @@
 
     <div class="research-list" id="research-list">
 
-      <div class="research-item" data-cat="arch">
+      <!-- ① 大模型架构 - MHA → MLA -->
+      <a class="research-item" data-cat="arch" href="https://medium.com/data-science/deepseek-v3-explained-1-multi-head-latent-attention-ed6bee2a67c4" target="_blank" style="text-decoration:none; color:inherit;">
         <div class="research-accent-bar" style="background: var(--accent-arch)"></div>
         <div class="research-content">
           <div class="research-category" style="color: var(--accent-arch)">大模型架构</div>
           <div class="research-title">Transformer 注意力机制演进全景：从 MHA 到 MLA</div>
-          <div class="research-desc">从标准多头注意力出发，梳理 MQA、GQA、MLA 各变体的设计动机与性能权衡，结合 DeepSeek-V2 实际应用分析。</div>
+          <div class="research-desc">从标准多头注意力出发，梳理 MQA→GQA→MLA 各变体的设计动机与性能权衡。MLA 的核心思路：将 KV 张量压缩到低维潜空间再解压，在节省 KV Cache 内存的同时还略微提升了建模精度——DeepSeek-V2 消融实验显示 MLA 优于 GQA。来源：Medium / Data Science</div>
         </div>
-        <div class="research-date">待发布</div>
-      </div>
+        <div class="research-date">2025-01-31</div>
+      </a>
 
-      <div class="research-item" data-cat="arch">
+      <!-- ② 大模型架构 - 2026 LLM 架构大横评 -->
+      <a class="research-item" data-cat="arch" href="https://magazine.sebastianraschka.com/p/the-big-llm-architecture-comparison" target="_blank" style="text-decoration:none; color:inherit;">
         <div class="research-accent-bar" style="background: var(--accent-arch)"></div>
         <div class="research-content">
           <div class="research-category" style="color: var(--accent-arch)">大模型架构</div>
-          <div class="research-title">Mixture of Experts（MoE）架构深度解析</div>
-          <div class="research-desc">专家路由机制、负载均衡策略、稀疏激活的计算收益，以 Mixtral 和 DeepSeek-MoE 为案例。</div>
+          <div class="research-title">2026 大型 LLM 架构横评：DeepSeek / Llama 4 / Qwen3 / Kimi K2 全覆盖</div>
+          <div class="research-desc">Sebastian Raschka 持续更新的综合对比文章（最新更新 2026-04-02 加入 Gemma 4）。核心发现：① MoE 已成主流（671B 参数 / 37B 激活）；② QK-Norm 提升训练稳定性；③ 滑动窗口注意力 vs 线性注意力的权衡；④ Gated DeltaNet 在 Qwen3-Next 中的实战部署。来源：Ahead of AI / Sebastian Raschka</div>
         </div>
-        <div class="research-date">待发布</div>
-      </div>
+        <div class="research-date">2026-04-02</div>
+      </a>
 
-      <div class="research-item" data-cat="agent">
+      <!-- ③ AI Agent - 6 大协议全景 -->
+      <a class="research-item" data-cat="agent" href="https://developers.googleblog.com/developers-guide-to-ai-agent-protocols/" target="_blank" style="text-decoration:none; color:inherit;">
         <div class="research-accent-bar" style="background: var(--accent-agent)"></div>
         <div class="research-content">
           <div class="research-category" style="color: var(--accent-agent)">AI Agent</div>
-          <div class="research-title">2026 Agent 架构全景：从 ReAct 到 MCP 协议</div>
-          <div class="research-desc">梳理 Agent 架构演进脉络，重点分析 MCP 协议的设计哲学与工具调用标准化对生态的影响。</div>
+          <div class="research-title">Google 发布 6 大 Agent 协议实战指南：MCP / A2A / UCP / AP2 / A2UI / AG-UI</div>
+          <div class="research-desc">以餐厅供应链 Agent 为贯穿案例，逐一演示 6 个协议的代码实现。关键结论：按需叠加协议，不要第一天就全量部署；MCP 负责数据接入，A2A 负责 Agent 间通信，两者是最高频组合；AP2 为 Agent 自主支付行为提供不可抵赖的审计链。来源：Google Developer Blog</div>
         </div>
-        <div class="research-date">待发布</div>
-      </div>
+        <div class="research-date">2026-03-18</div>
+      </a>
 
-      <div class="research-item" data-cat="agent">
+      <!-- ④ AI Agent - MCP 2026 年预测 -->
+      <a class="research-item" data-cat="agent" href="https://developers.redhat.com/articles/2026/01/08/building-effective-ai-agents-mcp" target="_blank" style="text-decoration:none; color:inherit;">
         <div class="research-accent-bar" style="background: var(--accent-agent)"></div>
         <div class="research-content">
           <div class="research-category" style="color: var(--accent-agent)">AI Agent</div>
-          <div class="research-title">Claude Code vs Cursor：AI Coding Agent 能力对比</div>
-          <div class="research-desc">从任务完成率、上下文管理、工具集成三个维度对比两大主流 AI Coding 工具，附实测数据。</div>
+          <div class="research-title">在 OpenShift AI 中用 MCP 构建 Agentic AI：从理论到生产实践</div>
+          <div class="research-desc">Red Hat 技术文章，展示 MCP 在企业级 AI 平台（OpenShift AI）中的工程落地路径。重点：MCP Server 的 Stdio 和 SSE 两种连接模式差异；McpToolset 如何让 Agent 自动发现工具定义；生产环境中 MCP 的安全边界。来源：Red Hat Developer</div>
         </div>
-        <div class="research-date">待发布</div>
-      </div>
+        <div class="research-date">2026-01-08</div>
+      </a>
 
-      <div class="research-item" data-cat="industry">
+      <!-- ⑤ 行业应用 - PwC AI 效能报告 -->
+      <a class="research-item" data-cat="industry" href="https://www.pwccn.com/zh/press-room/press-releases/pr-150426.html" target="_blank" style="text-decoration:none; color:inherit;">
         <div class="research-accent-bar" style="background: var(--accent-industry)"></div>
         <div class="research-content">
           <div class="research-category" style="color: var(--accent-industry)">行业应用</div>
-          <div class="research-title">AI 在医疗影像诊断的落地现状：技术路径与监管挑战</div>
-          <div class="research-desc">盘点 FDA 批准的 AI 医疗设备，分析技术路径分化与国内监管政策差异，重点关注多模态诊断趋势。</div>
+          <div class="research-title">PwC《2026 AI 效能研究》：74% 收益被 20% 企业拿走，中国 AI 适配指数全球第一</div>
+          <div class="research-desc">普华永道访谈全球 1,217 名高管（25 行业）的年度大报告。量化发现：AI 头部企业重塑商业模式的概率是同行 2.6 倍；自主自优化运营模式采用率高出 1.9 倍；员工对 AI 输出信任度高出 2 倍。中国大陆和香港分列 AI 适配指数第一、第二。来源：PwC China / 2026-04-15</div>
         </div>
-        <div class="research-date">待发布</div>
-      </div>
+        <div class="research-date">2026-04-15</div>
+      </a>
 
+      <!-- ⑥ 行业应用 - 企业 AI 转型 ROI -->
       <div class="research-item" data-cat="industry">
         <div class="research-accent-bar" style="background: var(--accent-industry)"></div>
         <div class="research-content">
           <div class="research-category" style="color: var(--accent-industry)">行业应用</div>
           <div class="research-title">企业 AI 转型中的 ROI 迷局：哪些部署真的跑通了？</div>
-          <div class="research-desc">基于 McKinsey、BCG 等机构2025年报告，分析已验证的 AI 落地场景，拆解成功要素与失败模式。</div>
+          <div class="research-desc">基于 PwC 2026、McKinsey State of AI 2025 等报告，拆解企业 AI 落地的成功要素：增长导向 vs 效率导向的战略差异；将 AI 嵌入工作流（而非添加工具）的操作路径；治理委员会对规模化信任的关键作用。（深度分析撰写中）</div>
         </div>
-        <div class="research-date">待发布</div>
+        <div class="research-date">撰写中</div>
       </div>
 
     </div>
@@ -1051,44 +1109,76 @@
   <div id="tab-sources" class="tab-panel">
     <div class="section-header">
       <span class="section-title">信息源体系</span>
-      <span class="section-meta">持续校准中</span>
+      <span class="section-meta">5 大类 · 30+ 渠道 · 持续校准</span>
     </div>
 
-    <div class="sources-grid">
+    <!-- 说明 -->
+    <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; margin-bottom: 20px; font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+      参考林克 AI 洞察日报的信息源管理策略——不只是"订阅"，而是按质量分级。🟢 一级：直接产出原始研究（论文/技术报告）；🔵 二级：深度解读与分析；🟡 三级：行业动态追踪。每个来源定期评估相关度。
+    </div>
 
+    <div class="sources-grid" style="grid-template-columns: repeat(3, 1fr);">
+
+      <!-- 学术论文 -->
       <div class="source-category">
-        <div class="source-category-title" style="color: var(--accent-arch)">大模型架构 · 原始资料</div>
+        <div class="source-category-title" style="color: var(--accent-arch)">📄 学术论文</div>
         <div class="source-list">
-          <div class="source-item"><span class="source-name">arXiv cs.LG / cs.CL</span><span class="source-badge">论文</span></div>
-          <div class="source-item"><span class="source-name">Anthropic Research Blog</span><span class="source-badge">博客</span></div>
-          <div class="source-item"><span class="source-name">OpenAI Research</span><span class="source-badge">博客</span></div>
-          <div class="source-item"><span class="source-name">Google DeepMind Blog</span><span class="source-badge">博客</span></div>
-          <div class="source-item"><span class="source-name">Hugging Face Blog</span><span class="source-badge">社区</span></div>
-          <div class="source-item"><span class="source-name">Papers With Code</span><span class="source-badge">论文</span></div>
+          <div class="source-item"><span class="source-name">arXiv cs.LG · cs.CL · cs.AI</span><span class="source-badge">🟢 一级</span></div>
+          <div class="source-item"><span class="source-name">Papers With Code</span><span class="source-badge">🟢 一级</span></div>
+          <div class="source-item"><span class="source-name">Semantic Scholar</span><span class="source-badge">🔵 二级</span></div>
+          <div class="source-item"><span class="source-name">NeurIPS / ICML / ICLR</span><span class="source-badge">🟢 一级</span></div>
         </div>
       </div>
 
+      <!-- 研究机构博客 -->
       <div class="source-category">
-        <div class="source-category-title" style="color: var(--accent-agent)">AI Agent · 前沿动态</div>
+        <div class="source-category-title" style="color: var(--accent-arch)">🔬 研究机构</div>
         <div class="source-list">
-          <div class="source-item"><span class="source-name">LangChain Blog</span><span class="source-badge">博客</span></div>
-          <div class="source-item"><span class="source-name">GitHub Trending (AI)</span><span class="source-badge">开源</span></div>
-          <div class="source-item"><span class="source-name">AgentBench / SWE-bench</span><span class="source-badge">评测</span></div>
-          <div class="source-item"><span class="source-name">Andrej Karpathy</span><span class="source-badge">X/推特</span></div>
-          <div class="source-item"><span class="source-name">Jim Fan</span><span class="source-badge">X/推特</span></div>
-          <div class="source-item"><span class="source-name">ClawBook 社区</span><span class="source-badge">社区</span></div>
+          <div class="source-item"><span class="source-name">Anthropic Research</span><span class="source-badge">🟢 一级</span></div>
+          <div class="source-item"><span class="source-name">OpenAI Research Blog</span><span class="source-badge">🟢 一级</span></div>
+          <div class="source-item"><span class="source-name">Google DeepMind Blog</span><span class="source-badge">🟢 一级</span></div>
+          <div class="source-item"><span class="source-name">Hugging Face Blog</span><span class="source-badge">🔵 二级</span></div>
+          <div class="source-item"><span class="source-name">Meta AI Research</span><span class="source-badge">🟢 一级</span></div>
+          <div class="source-item"><span class="source-name">DeepSeek / Moonshot Blog</span><span class="source-badge">🟢 一级</span></div>
         </div>
       </div>
 
+      <!-- AI Agent 生态 -->
       <div class="source-category">
-        <div class="source-category-title" style="color: var(--accent-industry)">行业应用 · 分析资料</div>
+        <div class="source-category-title" style="color: var(--accent-agent)">🤖 Agent 生态</div>
         <div class="source-list">
-          <div class="source-item"><span class="source-name">36kr AI 频道</span><span class="source-badge">新闻</span></div>
-          <div class="source-item"><span class="source-name">McKinsey AI Report</span><span class="source-badge">报告</span></div>
-          <div class="source-item"><span class="source-name">a16z AI Research</span><span class="source-badge">VC视角</span></div>
-          <div class="source-item"><span class="source-name">Product Hunt AI</span><span class="source-badge">产品</span></div>
-          <div class="source-item"><span class="source-name">量子位 / 机器之心</span><span class="source-badge">媒体</span></div>
-          <div class="source-item"><span class="source-name">AI 超级个体（公众号）</span><span class="source-badge">公众号</span></div>
+          <div class="source-item"><span class="source-name">LangChain Blog</span><span class="source-badge">🔵 二级</span></div>
+          <div class="source-item"><span class="source-name">Google ADK 文档</span><span class="source-badge">🟢 一级</span></div>
+          <div class="source-item"><span class="source-name">GitHub Trending (AI)</span><span class="source-badge">🔵 二级</span></div>
+          <div class="source-item"><span class="source-name">SWE-bench · AgentBench</span><span class="source-badge">🔵 二级</span></div>
+          <div class="source-item"><span class="source-name">modelcontextprotocol.io</span><span class="source-badge">🟢 一级</span></div>
+          <div class="source-item"><span class="source-name">a2a-protocol.org</span><span class="source-badge">🟢 一级</span></div>
+        </div>
+      </div>
+
+      <!-- 高质量个人/媒体 -->
+      <div class="source-category">
+        <div class="source-category-title" style="color: var(--accent-agent)">✍️ 高质量解读</div>
+        <div class="source-list">
+          <div class="source-item"><span class="source-name">Sebastian Raschka · Ahead of AI</span><span class="source-badge">🔵 二级</span></div>
+          <div class="source-item"><span class="source-name">Andrej Karpathy (X)</span><span class="source-badge">🔵 二级</span></div>
+          <div class="source-item"><span class="source-name">Simon Willison's Blog</span><span class="source-badge">🔵 二级</span></div>
+          <div class="source-item"><span class="source-name">Jim Fan (X)</span><span class="source-badge">🔵 二级</span></div>
+          <div class="source-item"><span class="source-name">The Gradient</span><span class="source-badge">🔵 二级</span></div>
+          <div class="source-item"><span class="source-name">Interconnects Newsletter</span><span class="source-badge">🔵 二级</span></div>
+        </div>
+      </div>
+
+      <!-- 行业动态 -->
+      <div class="source-category">
+        <div class="source-category-title" style="color: var(--accent-industry)">📊 行业动态</div>
+        <div class="source-list">
+          <div class="source-item"><span class="source-name">36kr AI 频道</span><span class="source-badge">🟡 三级</span></div>
+          <div class="source-item"><span class="source-name">量子位 / 机器之心</span><span class="source-badge">🟡 三级</span></div>
+          <div class="source-item"><span class="source-name">McKinsey AI Report</span><span class="source-badge">🔵 二级</span></div>
+          <div class="source-item"><span class="source-name">a16z AI Research</span><span class="source-badge">🔵 二级</span></div>
+          <div class="source-item"><span class="source-name">PwC AI Reports</span><span class="source-badge">🔵 二级</span></div>
+          <div class="source-item"><span class="source-name">MIT Technology Review</span><span class="source-badge">🔵 二级</span></div>
         </div>
       </div>
 
@@ -1198,7 +1288,7 @@
   // 初始化
   renderCalendar();
   animateCount(document.getElementById('stat-daily'), 1);
-  animateCount(document.getElementById('stat-research'), 6);
+  animateCount(document.getElementById('stat-research'), 5);
   animateCount(document.getElementById('stat-knowledge'), 18);
 </script>
 
