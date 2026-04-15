@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>埃姆的 AI 洞察 · 大模型 × Agent × 行业应用</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F4F0;
+    --surface: #FFFFFF;
+    --surface-2: #F0EDE8;
+    --border: #E2DDD8;
+    --text-primary: #1A1916;
+    --text-secondary: #6B6560;
+    --text-muted: #9C9690;
+    --accent-arch: #1B4332;      /* 大模型架构 - 深绿 */
+    --accent-arch-light: #D8EFE0;
+    --accent-agent: #1E3A5F;     /* AI Agent - 深蓝 */
+    --accent-agent-light: #D6E4F0;
+    --accent-industry: #6B2D0F;  /* 行业应用 - 深棕红 */
+    --accent-industry-light: #F5DDD1;
+    --tag-bg: #EDEBE6;
+    --radius: 8px;
+    --radius-lg: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* 顶部装饰线 */
+  .top-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-arch) 0%, var(--accent-agent) 50%, var(--accent-industry) 100%);
+  }
+
+  /* 顶部导航 */
+  .nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .nav-logo .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-arch);
+    display: inline-block;
+  }
+
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+  }
+
+  .nav-tab {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    transition: all 0.15s;
+  }
+
+  .nav-tab:hover {
+    background: var(--surface-2);
+    color: var(--text-primary);
+  }
+
+  .nav-tab.active {
+    background: var(--text-primary);
+    color: #fff;
+  }
+
+  /* 主容器 */
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  /* Hero 区 */
+  .hero {
+    margin-bottom: 40px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .hero-badge .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+  }
+
+  .hero-title span.highlight-arch { color: var(--accent-arch); }
+  .hero-title span.highlight-agent { color: var(--accent-agent); }
+  .hero-title span.highlight-industry { color: var(--accent-industry); }
+
+  .hero-desc {
+    font-size: 15px;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin-bottom: 28px;
+  }
+
+  /* 统计卡片 */
+  .stats-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 100px;
+  }
+
+  .stat-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Tab 内容 */
+  .tab-panel {
+    display: none;
+  }
+  .tab-panel.active {
+    display: block;
+    animation: fadeIn 0.2s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 版块标题 */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .section-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* 方向筛选标签 */
+  .filter-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: 500;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+  }
+
+  .filter-btn.active-arch {
+    background: var(--accent-arch);
+    border-color: var(--accent-arch);
+    color: #fff;
+  }
+
+  .filter-btn.active-agent {
+    background: var(--accent-agent);
+    border-color: var(--accent-agent);
+    color: #fff;
+  }
+
+  .filter-btn.active-industry {
+    background: var(--accent-industry);
+    border-color: var(--accent-industry);
+    color: #fff;
+  }
+
+  .filter-btn.active-all {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    color: #fff;
+  }
+
+  /* 日报卡片 */
+  .daily-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: 680px) {
+    .daily-grid { grid-template-columns: 1fr; }
+  }
+
+  .daily-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .daily-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transform: translateY(-1px);
+  }
+
+  .daily-card.featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .daily-card-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+
+  .daily-card-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .daily-card-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .daily-card-preview {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .daily-card-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .tag-arch { background: var(--accent-arch-light); color: var(--accent-arch); }
+  .tag-agent { background: var(--accent-agent-light); color: var(--accent-agent); }
+  .tag-industry { background: var(--accent-industry-light); color: var(--accent-industry); }
+  .tag-default { background: var(--tag-bg); color: var(--text-secondary); }
+
+  .daily-card-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  .daily-card-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .daily-card-count-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: right;
+  }
+
+  /* 日历 */
+  .calendar-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-bottom: 32px;
+  }
+
+  .calendar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .calendar-month {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .calendar-nav-btn {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-secondary);
+    transition: all 0.1s;
+  }
+
+  .calendar-nav-btn:hover {
+    background: var(--border);
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+
+  .cal-header {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    font-weight: 500;
+  }
+
+  .cal-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.1s;
+    position: relative;
+  }
+
+  .cal-day:hover:not(.empty) {
+    background: var(--surface-2);
+  }
+
+  .cal-day.empty { cursor: default; color: transparent; }
+
+  .cal-day.today {
+    background: var(--text-primary);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .cal-day.has-daily::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent-arch);
+  }
+
+  .cal-day.has-weekly {
+    border: 1.5px solid var(--accent-agent);
+    color: var(--accent-agent);
+    font-weight: 600;
+  }
+
+  .calendar-legend {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-arch);
+  }
+
+  .legend-ring {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    border: 1.5px solid var(--accent-agent);
+  }
+
+  /* 深度调研列表 */
+  .research-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .research-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 4px 1fr auto;
+    gap: 16px;
+    align-items: start;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .research-item:hover {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    transform: translateX(2px);
+  }
+
+  .research-accent-bar {
+    width: 4px;
+    border-radius: 2px;
+    align-self: stretch;
+    min-height: 40px;
+  }
+
+  .research-content {}
+
+  .research-category {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+  }
+
+  .research-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .research-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .research-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  /* 知识库 */
+  .knowledge-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .knowledge-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .knowledge-grid { grid-template-columns: 1fr; }
+  }
+
+  .knowledge-category {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .knowledge-category-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .knowledge-category-name {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .knowledge-category-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    background: var(--tag-bg);
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  .knowledge-items {
+    padding: 12px 0;
+  }
+
+  .knowledge-item {
+    padding: 8px 20px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.1s;
+  }
+
+  .knowledge-item:hover {
+    background: var(--surface-2);
+    color: var(--text-primary);
+  }
+
+  .knowledge-item::before {
+    content: '→';
+    font-size: 11px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  /* 信息源版块 */
+  .sources-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .sources-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .source-category {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+  }
+
+  .source-category-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 14px;
+  }
+
+  .source-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .source-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+  }
+
+  .source-name {
+    color: var(--text-secondary);
+  }
+
+  .source-badge {
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    background: var(--tag-bg);
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* 空状态 */
+  .empty-state {
+    background: var(--surface);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px 24px;
+    text-align: center;
+    color: var(--text-muted);
+  }
+
+  .empty-state-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .empty-state-text {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* 月份分组 */
+  .month-group {
+    margin-bottom: 32px;
+  }
+
+  .month-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    padding-left: 4px;
+    border-left: 2px solid var(--border);
+    padding-left: 10px;
+  }
+
+  /* 周报卡片 */
+  .weekly-card {
+    background: linear-gradient(135deg, #1B4332 0%, #1E3A5F 100%);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    color: #fff;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .weekly-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  }
+
+  .weekly-card-label {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    opacity: 0.7;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .weekly-card-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .weekly-card-meta {
+    font-size: 13px;
+    opacity: 0.75;
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 24px;
+    margin-top: 40px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .footer a:hover {
+    color: var(--text-primary);
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <span class="dot"></span>
+      埃姆的 AI 洞察
+    </a>
+    <div class="nav-tabs">
+      <button class="nav-tab active" data-tab="daily" onclick="switchTab('daily', this)">日报</button>
+      <button class="nav-tab" data-tab="research" onclick="switchTab('research', this)">深度调研</button>
+      <button class="nav-tab" data-tab="knowledge" onclick="switchTab('knowledge', this)">知识库</button>
+      <button class="nav-tab" data-tab="sources" onclick="switchTab('sources', this)">信息源</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      持续更新中 · 埃姆的 AI 学习系统
+    </div>
+    <h1 class="hero-title">
+      深入<span class="highlight-arch">大模型架构</span>，<br>
+      理解<span class="highlight-agent">Agent 机制</span>，<br>
+      追踪<span class="highlight-industry">行业应用</span>
+    </h1>
+    <p class="hero-desc">
+      不是新闻聚合，是技术理解的沉淀。每天精选国内外优质资料，从论文到产品落地，建立真正有深度的 AI 知识体系。
+    </p>
+    <div class="stats-row">
+      <div class="stat-card">
+        <span class="stat-value" id="stat-daily">0</span>
+        <span class="stat-label">日报期数</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value" id="stat-research">0</span>
+        <span class="stat-label">深度调研</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value" id="stat-knowledge">0</span>
+        <span class="stat-label">知识文档</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">3</span>
+        <span class="stat-label">追踪方向</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab: 日报 -->
+  <div id="tab-daily" class="tab-panel active">
+    <div class="section-header">
+      <span class="section-title">AI 日报</span>
+      <span class="section-meta">精选三大方向每日动态</span>
+    </div>
+
+    <!-- 最新周报 -->
+    <div class="weekly-card" onclick="alert('周报功能即将上线')">
+      <div class="weekly-card-label">📅 最新周报</div>
+      <div class="weekly-card-title">AI 洞察 · 本站首刊</div>
+      <div class="weekly-card-meta">三大方向全面启动 · 信息源系统搭建中</div>
+    </div>
+
+    <!-- 最新日报卡片 -->
+    <div class="daily-grid">
+      <div class="daily-card featured" onclick="alert('日报详情即将上线')">
+        <div class="daily-card-accent" style="background: linear-gradient(90deg, var(--accent-arch), var(--accent-agent))"></div>
+        <div>
+          <div class="daily-card-date">2026-04-15 · 创刊号</div>
+          <div class="daily-card-title">埃姆的 AI 洞察正式启动</div>
+          <div class="daily-card-preview">
+            聚焦大模型架构原理、AI Agent 机制、AI 行业应用三大方向，建立系统化的技术洞察体系。
+            内容来源涵盖 arXiv 论文、Anthropic/OpenAI 技术博客、GitHub Trending 及国内外优质信息源。
+          </div>
+          <div class="daily-card-tags">
+            <span class="tag tag-arch">大模型架构</span>
+            <span class="tag tag-agent">AI Agent</span>
+            <span class="tag tag-industry">行业应用</span>
+          </div>
+        </div>
+        <div class="daily-card-stats">
+          <div class="daily-card-count">01</div>
+          <div class="daily-card-count-label">第 1 期<br>创刊</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 日历 -->
+    <div class="calendar-wrap">
+      <div class="calendar-nav">
+        <button class="calendar-nav-btn" onclick="changeMonth(-1)">◀</button>
+        <span class="calendar-month" id="calendar-month-label">2026年4月</span>
+        <button class="calendar-nav-btn" onclick="changeMonth(1)">▶</button>
+      </div>
+      <div class="calendar-grid" id="calendar-grid">
+        <!-- 由 JS 渲染 -->
+      </div>
+      <div class="calendar-legend">
+        <div class="legend-item"><span class="legend-dot"></span> 有日报</div>
+        <div class="legend-item"><span class="legend-ring"></span> 有周报</div>
+      </div>
+    </div>
+
+    <div class="empty-state">
+      <div class="empty-state-icon">📬</div>
+      <div class="empty-state-text">
+        往期日报正在建立中<br>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted);">内容将从 arXiv · GitHub · Anthropic Blog 等优质源持续更新</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab: 深度调研 -->
+  <div id="tab-research" class="tab-panel">
+    <div class="section-header">
+      <span class="section-title">深度调研</span>
+      <span class="section-meta">持续更新中</span>
+    </div>
+
+    <div class="filter-row">
+      <button class="filter-btn active-all" onclick="filterResearch('all', this)">全部</button>
+      <button class="filter-btn" onclick="filterResearch('arch', this)" data-cat="arch">大模型架构</button>
+      <button class="filter-btn" onclick="filterResearch('agent', this)" data-cat="agent">AI Agent</button>
+      <button class="filter-btn" onclick="filterResearch('industry', this)" data-cat="industry">行业应用</button>
+    </div>
+
+    <div class="research-list" id="research-list">
+
+      <div class="research-item" data-cat="arch">
+        <div class="research-accent-bar" style="background: var(--accent-arch)"></div>
+        <div class="research-content">
+          <div class="research-category" style="color: var(--accent-arch)">大模型架构</div>
+          <div class="research-title">Transformer 注意力机制演进全景：从 MHA 到 MLA</div>
+          <div class="research-desc">从标准多头注意力出发，梳理 MQA、GQA、MLA 各变体的设计动机与性能权衡，结合 DeepSeek-V2 实际应用分析。</div>
+        </div>
+        <div class="research-date">待发布</div>
+      </div>
+
+      <div class="research-item" data-cat="arch">
+        <div class="research-accent-bar" style="background: var(--accent-arch)"></div>
+        <div class="research-content">
+          <div class="research-category" style="color: var(--accent-arch)">大模型架构</div>
+          <div class="research-title">Mixture of Experts（MoE）架构深度解析</div>
+          <div class="research-desc">专家路由机制、负载均衡策略、稀疏激活的计算收益，以 Mixtral 和 DeepSeek-MoE 为案例。</div>
+        </div>
+        <div class="research-date">待发布</div>
+      </div>
+
+      <div class="research-item" data-cat="agent">
+        <div class="research-accent-bar" style="background: var(--accent-agent)"></div>
+        <div class="research-content">
+          <div class="research-category" style="color: var(--accent-agent)">AI Agent</div>
+          <div class="research-title">2026 Agent 架构全景：从 ReAct 到 MCP 协议</div>
+          <div class="research-desc">梳理 Agent 架构演进脉络，重点分析 MCP 协议的设计哲学与工具调用标准化对生态的影响。</div>
+        </div>
+        <div class="research-date">待发布</div>
+      </div>
+
+      <div class="research-item" data-cat="agent">
+        <div class="research-accent-bar" style="background: var(--accent-agent)"></div>
+        <div class="research-content">
+          <div class="research-category" style="color: var(--accent-agent)">AI Agent</div>
+          <div class="research-title">Claude Code vs Cursor：AI Coding Agent 能力对比</div>
+          <div class="research-desc">从任务完成率、上下文管理、工具集成三个维度对比两大主流 AI Coding 工具，附实测数据。</div>
+        </div>
+        <div class="research-date">待发布</div>
+      </div>
+
+      <div class="research-item" data-cat="industry">
+        <div class="research-accent-bar" style="background: var(--accent-industry)"></div>
+        <div class="research-content">
+          <div class="research-category" style="color: var(--accent-industry)">行业应用</div>
+          <div class="research-title">AI 在医疗影像诊断的落地现状：技术路径与监管挑战</div>
+          <div class="research-desc">盘点 FDA 批准的 AI 医疗设备，分析技术路径分化与国内监管政策差异，重点关注多模态诊断趋势。</div>
+        </div>
+        <div class="research-date">待发布</div>
+      </div>
+
+      <div class="research-item" data-cat="industry">
+        <div class="research-accent-bar" style="background: var(--accent-industry)"></div>
+        <div class="research-content">
+          <div class="research-category" style="color: var(--accent-industry)">行业应用</div>
+          <div class="research-title">企业 AI 转型中的 ROI 迷局：哪些部署真的跑通了？</div>
+          <div class="research-desc">基于 McKinsey、BCG 等机构2025年报告，分析已验证的 AI 落地场景，拆解成功要素与失败模式。</div>
+        </div>
+        <div class="research-date">待发布</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Tab: 知识库 -->
+  <div id="tab-knowledge" class="tab-panel">
+    <div class="section-header">
+      <span class="section-title">知识库</span>
+      <span class="section-meta">三大维度 · 持续沉淀</span>
+    </div>
+
+    <div class="knowledge-grid">
+
+      <!-- 大模型架构 -->
+      <div class="knowledge-category">
+        <div class="knowledge-category-header" style="border-top: 3px solid var(--accent-arch);">
+          <span class="knowledge-category-name" style="color: var(--accent-arch)">大模型架构原理</span>
+          <span class="knowledge-category-count">建设中</span>
+        </div>
+        <div class="knowledge-items">
+          <div class="knowledge-item">Transformer 架构全解</div>
+          <div class="knowledge-item">注意力机制演进：MHA→GQA→MLA</div>
+          <div class="knowledge-item">位置编码：RoPE / ALiBi</div>
+          <div class="knowledge-item">MoE 专家混合架构</div>
+          <div class="knowledge-item">推理优化：KV Cache</div>
+          <div class="knowledge-item">后训练对齐：RLHF / DPO</div>
+        </div>
+      </div>
+
+      <!-- AI Agent -->
+      <div class="knowledge-category">
+        <div class="knowledge-category-header" style="border-top: 3px solid var(--accent-agent);">
+          <span class="knowledge-category-name" style="color: var(--accent-agent)">AI Agent 机制</span>
+          <span class="knowledge-category-count">建设中</span>
+        </div>
+        <div class="knowledge-items">
+          <div class="knowledge-item">Agent 架构演进全景</div>
+          <div class="knowledge-item">ReAct / CoT / ToT 推理模式</div>
+          <div class="knowledge-item">MCP 协议与工具调用</div>
+          <div class="knowledge-item">Memory 系统设计模式</div>
+          <div class="knowledge-item">Multi-Agent 协作机制</div>
+          <div class="knowledge-item">AI Coding Agent 实测</div>
+        </div>
+      </div>
+
+      <!-- 行业应用 -->
+      <div class="knowledge-category">
+        <div class="knowledge-category-header" style="border-top: 3px solid var(--accent-industry);">
+          <span class="knowledge-category-name" style="color: var(--accent-industry)">AI 行业应用</span>
+          <span class="knowledge-category-count">建设中</span>
+        </div>
+        <div class="knowledge-items">
+          <div class="knowledge-item">医疗 AI 落地现状</div>
+          <div class="knowledge-item">金融 AI：风控与量化</div>
+          <div class="knowledge-item">企业 AI 转型方法论</div>
+          <div class="knowledge-item">AI 原生产品设计模式</div>
+          <div class="knowledge-item">国内外监管政策对比</div>
+          <div class="knowledge-item">AI 落地 ROI 分析框架</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Tab: 信息源 -->
+  <div id="tab-sources" class="tab-panel">
+    <div class="section-header">
+      <span class="section-title">信息源体系</span>
+      <span class="section-meta">持续校准中</span>
+    </div>
+
+    <div class="sources-grid">
+
+      <div class="source-category">
+        <div class="source-category-title" style="color: var(--accent-arch)">大模型架构 · 原始资料</div>
+        <div class="source-list">
+          <div class="source-item"><span class="source-name">arXiv cs.LG / cs.CL</span><span class="source-badge">论文</span></div>
+          <div class="source-item"><span class="source-name">Anthropic Research Blog</span><span class="source-badge">博客</span></div>
+          <div class="source-item"><span class="source-name">OpenAI Research</span><span class="source-badge">博客</span></div>
+          <div class="source-item"><span class="source-name">Google DeepMind Blog</span><span class="source-badge">博客</span></div>
+          <div class="source-item"><span class="source-name">Hugging Face Blog</span><span class="source-badge">社区</span></div>
+          <div class="source-item"><span class="source-name">Papers With Code</span><span class="source-badge">论文</span></div>
+        </div>
+      </div>
+
+      <div class="source-category">
+        <div class="source-category-title" style="color: var(--accent-agent)">AI Agent · 前沿动态</div>
+        <div class="source-list">
+          <div class="source-item"><span class="source-name">LangChain Blog</span><span class="source-badge">博客</span></div>
+          <div class="source-item"><span class="source-name">GitHub Trending (AI)</span><span class="source-badge">开源</span></div>
+          <div class="source-item"><span class="source-name">AgentBench / SWE-bench</span><span class="source-badge">评测</span></div>
+          <div class="source-item"><span class="source-name">Andrej Karpathy</span><span class="source-badge">X/推特</span></div>
+          <div class="source-item"><span class="source-name">Jim Fan</span><span class="source-badge">X/推特</span></div>
+          <div class="source-item"><span class="source-name">ClawBook 社区</span><span class="source-badge">社区</span></div>
+        </div>
+      </div>
+
+      <div class="source-category">
+        <div class="source-category-title" style="color: var(--accent-industry)">行业应用 · 分析资料</div>
+        <div class="source-list">
+          <div class="source-item"><span class="source-name">36kr AI 频道</span><span class="source-badge">新闻</span></div>
+          <div class="source-item"><span class="source-name">McKinsey AI Report</span><span class="source-badge">报告</span></div>
+          <div class="source-item"><span class="source-name">a16z AI Research</span><span class="source-badge">VC视角</span></div>
+          <div class="source-item"><span class="source-name">Product Hunt AI</span><span class="source-badge">产品</span></div>
+          <div class="source-item"><span class="source-name">量子位 / 机器之心</span><span class="source-badge">媒体</span></div>
+          <div class="source-item"><span class="source-name">AI 超级个体（公众号）</span><span class="source-badge">公众号</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <span>埃姆的 AI 洞察</span> · 
+  <a href="https://github.com/AMMPNK/ai-insight" target="_blank">GitHub</a> · 
+  <span>持续追踪 · 深度理解</span>
+</footer>
+
+<script>
+  // Tab 切换
+  function switchTab(tabId, el) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + tabId).classList.add('active');
+    el.classList.add('active');
+  }
+
+  // 调研筛选
+  function filterResearch(cat, el) {
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.className = 'filter-btn';
+    });
+    el.classList.add('active-' + cat);
+
+    document.querySelectorAll('.research-item').forEach(item => {
+      if (cat === 'all' || item.dataset.cat === cat) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  // 日历
+  let calYear = 2026, calMonth = 3; // 0-indexed, 3 = April
+
+  // 已有日报的日期（后续由脚本维护）
+  const dailyDates = new Set(['2026-04-15']);
+  const weeklyDates = new Set([]); // 暂无
+
+  function renderCalendar() {
+    const monthNames = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+    document.getElementById('calendar-month-label').textContent = `${calYear}年${monthNames[calMonth]}`;
+
+    const grid = document.getElementById('calendar-grid');
+    grid.innerHTML = '';
+
+    const days = ['日','一','二','三','四','五','六'];
+    days.forEach(d => {
+      const el = document.createElement('div');
+      el.className = 'cal-header';
+      el.textContent = d;
+      grid.appendChild(el);
+    });
+
+    const firstDay = new Date(calYear, calMonth, 1).getDay();
+    const totalDays = new Date(calYear, calMonth + 1, 0).getDate();
+    const today = new Date();
+
+    for (let i = 0; i < firstDay; i++) {
+      const el = document.createElement('div');
+      el.className = 'cal-day empty';
+      el.textContent = '·';
+      grid.appendChild(el);
+    }
+
+    for (let d = 1; d <= totalDays; d++) {
+      const el = document.createElement('div');
+      el.className = 'cal-day';
+      el.textContent = d;
+
+      const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      if (dailyDates.has(dateStr)) el.classList.add('has-daily');
+      if (weeklyDates.has(dateStr)) el.classList.add('has-weekly');
+      if (today.getFullYear() === calYear && today.getMonth() === calMonth && today.getDate() === d) {
+        el.classList.add('today');
+      }
+
+      grid.appendChild(el);
+    }
+  }
+
+  function changeMonth(delta) {
+    calMonth += delta;
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    renderCalendar();
+  }
+
+  // 统计数字动画
+  function animateCount(el, target) {
+    let current = 0;
+    const step = Math.ceil(target / 20);
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = current;
+      if (current >= target) clearInterval(timer);
+    }, 50);
+  }
+
+  // 初始化
+  renderCalendar();
+  animateCount(document.getElementById('stat-daily'), 1);
+  animateCount(document.getElementById('stat-research'), 6);
+  animateCount(document.getElementById('stat-knowledge'), 18);
+</script>
+
+</body>
+</html>
