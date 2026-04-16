@@ -21,7 +21,7 @@ from datetime import datetime
 from typing import Optional
 
 # API 配置
-KIM_API_BASE = "https://kim.corp.kuaishou.com"
+KIM_API_BASE = "https://openapi.corp.kuaishou.com"
 DEFAULT_TIMEOUT = 10
 
 
@@ -100,33 +100,61 @@ def send_webhook_message(webhook_url: str, content: str) -> bool:
 def send_api_message(
     app_key: str,
     secret_key: str,
-    message_id: str,
+    to_user: str,
     content: str,
     msg_type: str = "text"
 ) -> bool:
     """
-    通过 API 发送消息（指定用户模式）
-    使用 /openapi/v2/message/send 接口
+    通过 openapi 平台代理发送消息给指定用户
+    需要设置环境变量 KIM_SESSION_COOKIE（从浏览器复制 accessproxy_session）
     """
-    timestamp = str(int(time.time() * 1000))
-    nonce = generate_nonce()
-    signature = generate_signature(app_key, secret_key, timestamp, nonce)
+    session_cookie = os.environ.get("KIM_SESSION_COOKIE", "")
+    if not session_cookie:
+        print("错误：请设置环境变量 KIM_SESSION_COOKIE")
+        print("获取方式：")
+        print("  1. 浏览器打开 https://openapi.corp.kuaishou.com")
+        print("  2. 开发者工具 → Application → Cookies → 找到 accessproxy_session")
+        print("  3. export KIM_SESSION_COOKIE=\"<复制的值>\"")
+        return False
     
+    # 构建接收者参数
+    body_params = {"msgType": msg_type, "content": content}
+    if to_user.startswith("kim_"):
+        body_params["userId"] = to_user
+    elif to_user.startswith("session_"):
+        body_params["sessionId"] = to_user
+    else:
+        body_params["username"] = to_user
+    
+    # 通过 openapi 平台代理调用
     payload = {
         "appKey": app_key,
-        "timestamp": timestamp,
-        "nonce": nonce,
-        "signature": signature,
-        "messageId": message_id,  # 接收者的消息号
-        "msgType": msg_type,
-        "content": content
+        "bodyParams": body_params,
+        "headerParams": {},
+        "queryParams": {},
+        "method": "POST",
+        "path": "/openapi/v2/message/send",
+        "serverApiCode": "d50455a6-ce0c-4a8b-bd1e-9ae9c18d39e2",
+        "serverCode": "dc447d04-09c3-49eb-82b9-da71befb73d9",
+        "env": "production",
+        "appCode": app_key
     }
     
     headers = {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Origin": "https://openapi.corp.kuaishou.com",
+        "Referer": "https://openapi.corp.kuaishou.com/",
+        "Cookie": f"accessproxy_session={session_cookie}",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
     }
     
-    url = f"{KIM_API_BASE}/openapi/v2/message/send"
+    url = "https://openapi.corp.kuaishou.com/openapi/tools/debugApi"
+    print(f"[DEBUG] 请求 URL: {url}")
+    print(f"[DEBUG] 目标用户: {to_user}")
+    
+    import ssl
+    ssl_context = ssl.create_default_context()
     
     try:
         req = urllib.request.Request(
@@ -136,19 +164,34 @@ def send_api_message(
             method="POST"
         )
         
-        with urllib.request.urlopen(req, timeout=DEFAULT_TIMEOUT) as response:
+        with urllib.request.urlopen(req, timeout=DEFAULT_TIMEOUT, context=ssl_context) as response:
             result = json.loads(response.read().decode("utf-8"))
-            return result.get("code") == 0 or result.get("success", False)
+            print(f"[DEBUG] 响应: {json.dumps(result, ensure_ascii=False)}")
+            # 外层 code=0 表示代理调用成功，再看内层 result
+            if result.get("code") == 0:
+                inner = result.get("result", {}).get("result", {})
+                inner_code = inner.get("code", inner.get("status", -1))
+                if inner_code == 0 or str(inner_code).startswith("2"):
+                    return True
+                else:
+                    print(f"API 错误: {inner.get('message', inner)}")
+                    return False
+            else:
+                print(f"代理错误: {result}")
+                return False
     
     except urllib.error.HTTPError as e:
         print(f"HTTP 错误: {e.code} - {e.reason}")
-        if e.code == 401:
-            print("认证失败，请检查 appKey 和 secretKey 是否正确")
-        elif e.code == 403:
-            print("权限不足，请确认已申请「发送im消息」接口权限")
+        try:
+            error_body = e.read().decode("utf-8")
+            print(f"响应内容: {error_body}")
+        except:
+            pass
         return False
     except Exception as e:
         print(f"发送失败: {e}")
+        import traceback
+        traceback.print_exc()
         return False
 
 
@@ -169,16 +212,24 @@ def main():
     if len(sys.argv) < 2:
         print("使用方法：")
         print("  python kim_notify.py --webhook <webhook-url> --content <消息内容>")
-        print("  python kim_notify.py --api --message-id <消息号> --content <消息内容>")
-        print("\n示例：")
-        print('  python kim_notify.py --webhook "https://kim.corp.kuaishou.com/webhook/xxx" --content "日报已更新"')
+        print("  python kim_notify.py --api --to <用户> --content <消息内容>")
+        print("")
+        print("参数说明：")
+        print("  --to 可以是消息号（kim_xxx）或机器人名称（如「埃姆」）")
+        print("")
+        print("示例：")
+        print('  # 发给机器人「埃姆」')
+        print('  python kim_notify.py --api --to "埃姆" --content "日报已更新"')
+        print("")
+        print('  # 发给消息号')
+        print('  python kim_notify.py --api --to "kim_123456" --content "日报已更新"')
         sys.exit(1)
     
     # 解析参数
     args = sys.argv[1:]
     mode = "webhook"
     webhook_url = ""
-    message_id = ""
+    to_user = ""
     content = ""
     
     i = 0
@@ -191,8 +242,8 @@ def main():
         elif arg == "--api":
             mode = "api"
             i += 1
-        elif arg == "--message-id":
-            message_id = args[i + 1] if i + 1 < len(args) else ""
+        elif arg in ("--to", "--user", "--message-id"):
+            to_user = args[i + 1] if i + 1 < len(args) else ""
             i += 2
         elif arg == "--content":
             content = args[i + 1] if i + 1 < len(args) else ""
@@ -215,12 +266,15 @@ def main():
         success = send_webhook_message(webhook_url, content)
     
     else:  # api mode
-        if not message_id:
-            print("错误：请提供消息号 (--message-id)")
+        if not to_user:
+            to_user = os.environ.get("KIM_TO_USER", "")
+        if not to_user:
+            print("错误：请提供目标用户 (--to 或设置 KIM_TO_USER)")
+            print("提示：可以是消息号（kim_xxx）或机器人名称")
             sys.exit(1)
         
         app_key, secret_key = get_credentials()
-        success = send_api_message(app_key, secret_key, message_id, content)
+        success = send_api_message(app_key, secret_key, to_user, content)
     
     if success:
         print("✓ 消息发送成功")

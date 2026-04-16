@@ -855,6 +855,72 @@
     <!-- 最新日报卡片 -->
     <div class="daily-grid">
 
+      <!-- 第 2 期：三方向综述 -->
+      <div class="daily-card featured" id="daily-002">
+        <div class="daily-card-accent" style="background: linear-gradient(90deg, var(--accent-arch), var(--accent-agent), var(--accent-industry))"></div>
+        <div>
+          <div class="daily-card-date">2026-04-16 · 第 2 期</div>
+          <div class="daily-card-title">今日 AI 洞察 No.2 — GLM-5.1 破局、A2A 一周年、美联储 AI 采用监测</div>
+          <div class="daily-card-preview">
+            智谱 GLM-5.1 以 58.4% SWE-bench Pro 登顶，首个中国 LLM 全面超越美国模型；A2A 协议发布一周年，150+ 组织采用、落地三大云平台；美联储监测报告显示 18% 企业已采用 AI，金融/专业服务行业领先。
+          </div>
+          <div class="daily-card-tags">
+            <span class="tag tag-arch">大模型架构</span>
+            <span class="tag tag-agent">AI Agent</span>
+            <span class="tag tag-industry">行业应用</span>
+          </div>
+        </div>
+        <div class="daily-card-stats">
+          <div class="daily-card-count">02</div>
+          <div class="daily-card-count-label">第 2 期<br>持续追踪</div>
+        </div>
+      </div>
+
+      <!-- 大模型架构 -->
+      <div class="daily-card">
+        <div class="daily-card-accent" style="background: var(--accent-arch)"></div>
+        <div class="daily-card-date">大模型架构 · 2026-04-16</div>
+        <div class="daily-card-title">GLM-5.1 登顶 SWE-bench Pro：首个中国 LLM 全面超越美国模型</div>
+        <div class="daily-card-preview">
+          智谱 GLM-5.1 在 SWE-bench Pro 达到 58.4%，超越所有美国模型。架构升级：参数翻倍（355B→744B MoE），77.8% SWE-bench Verified。同时 DeepSeek V4 Preview 曝光：1T 参数 MoE、原生多模态、1M 上下文窗口，预计 4 月底发布。
+        </div>
+        <div class="daily-card-tags">
+          <span class="tag tag-arch">GLM-5.1</span>
+          <span class="tag tag-arch">MoE</span>
+          <span class="tag tag-arch">代码能力</span>
+        </div>
+      </div>
+
+      <!-- AI Agent -->
+      <div class="daily-card">
+        <div class="daily-card-accent" style="background: var(--accent-agent)"></div>
+        <div class="daily-card-date">AI Agent · 2026-04-16</div>
+        <div class="daily-card-title">A2A 协议一周年：150+ 组织采用，落地 AWS/Azure/GCP</div>
+        <div class="daily-card-preview">
+          Linux 基金会宣布 A2A 协议发布一周年成果：150+ 组织参与（包括 Salesforce、SAP、WorkDay），已在 AWS/Azure/GCP 三大云平台落地，首批企业进入生产环境。A2A 定义 Agent 间发现与通信标准，与 MCP（工具连接）形成互补。MCP Registry 也在 4 月正式上线。
+        </div>
+        <div class="daily-card-tags">
+          <span class="tag tag-agent">A2A</span>
+          <span class="tag tag-agent">MCP</span>
+          <span class="tag tag-agent">协议生态</span>
+        </div>
+      </div>
+
+      <!-- 行业应用 -->
+      <div class="daily-card">
+        <div class="daily-card-accent" style="background: var(--accent-industry)"></div>
+        <div class="daily-card-date">行业应用 · 2026-04-16</div>
+        <div class="daily-card-title">美联储 AI 采用监测：18% 企业已部署，金融业领先</div>
+        <div class="daily-card-preview">
+          美联储发布《Monitoring AI Adoption in the U.S. Economy》，整合三项调查数据：企业 AI 采用率 18%，员工 GenAI 使用率 41%，78% 劳动力所在企业已部署 AI。金融（33%）和专业服务（30%）行业采用率最高，显示 AI 正在认知密集型工作场景率先落地。
+        </div>
+        <div class="daily-card-tags">
+          <span class="tag tag-industry">美联储</span>
+          <span class="tag tag-industry">AI 采用</span>
+          <span class="tag tag-industry">行业分化</span>
+        </div>
+      </div>
+
       <!-- 创刊号：三方向综述 -->
       <div class="daily-card featured" id="daily-001">
         <div class="daily-card-accent" style="background: linear-gradient(90deg, var(--accent-arch), var(--accent-agent), var(--accent-industry))"></div>
@@ -1238,7 +1304,7 @@
   let calYear = 2026, calMonth = 3; // 0-indexed, 3 = April
 
   // 已有日报的日期（后续由脚本维护）
-  const dailyDates = new Set(['2026-04-15']);
+  const dailyDates = new Set(['2026-04-15', '2026-04-16']);
   const weeklyDates = new Set([]); // 暂无
 
   function renderCalendar() {
@@ -1391,7 +1457,7 @@
 
   // 初始化
   renderCalendar();
-  animateCount(document.getElementById('stat-daily'), 1);
+  animateCount(document.getElementById('stat-daily'), 2);
   animateCount(document.getElementById('stat-research'), 5);
   animateCount(document.getElementById('stat-knowledge'), 3);
 </script>
