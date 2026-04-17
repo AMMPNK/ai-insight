@@ -855,6 +855,57 @@
     <!-- 最新日报卡片 -->
     <div class="daily-grid">
 
+      <!-- 第 3 期：三方向综述 -->
+      <div class="daily-card featured" id="daily-003">
+        <div class="daily-card-accent" style="background: linear-gradient(90deg, var(--accent-arch), var(--accent-agent), var(--accent-industry))"></div>
+        <div>
+          <div class="daily-card-date">2026-04-17 · 第 3 期</div>
+          <div class="daily-card-title">今日 AI 洞察 No.3 — 企业 AI 采用真相：a16z 与 WRITER 报告揭示分化加剧</div>
+          <div class="daily-card-preview">
+            a16z 硬数据：29% Fortune 500 已是 AI 创业公司付费客户，编程用例领先一个数量级；WRITER 调查：60% 公司计划裁员不使用 AI 的员工，92% 在培养「AI 精英」阶层，组织撕裂加剧。
+          </div>
+          <div class="daily-card-tags">
+            <span class="tag tag-arch">大模型架构</span>
+            <span class="tag tag-agent">AI Agent</span>
+            <span class="tag tag-industry">行业应用</span>
+          </div>
+        </div>
+        <div class="daily-card-stats">
+          <div class="daily-card-count">03</div>
+          <div class="daily-card-count-label">第 3 期<br>持续追踪</div>
+        </div>
+      </div>
+
+      <!-- 行业应用 -->
+      <div class="daily-card">
+        <div class="daily-card-accent" style="background: var(--accent-industry)"></div>
+        <div class="daily-card-date">行业应用 · 2026-04-17</div>
+        <div class="daily-card-title">a16z 硬数据报告：29% Fortune 500 已部署企业 AI</div>
+        <div class="daily-card-preview">
+          a16z 发布《Where Enterprises are Actually Adopting AI》，基于创业公司私有数据和公开信息：29% Fortune 500、19% Global 2000 已是 AI 创业公司的付费客户。用例方面：编程（领先一个数量级）、客服、搜索占主导；行业方面：科技、法律、医疗率先采用。
+        </div>
+        <div class="daily-card-tags">
+          <span class="tag tag-industry">a16z</span>
+          <span class="tag tag-industry">企业 AI</span>
+          <span class="tag tag-industry">硬数据</span>
+        </div>
+      </div>
+
+      <!-- 行业应用 -->
+      <div class="daily-card">
+        <div class="daily-card-accent" style="background: var(--accent-industry)"></div>
+        <div class="daily-card-date">行业应用 · 2026-04-17</div>
+        <div class="daily-card-title">WRITER 调查：60% 公司计划裁员不使用 AI 的员工</div>
+        <div class="daily-card-preview">
+          WRITER 调查 2,400 名企业员工和高管发现：92% 在培养「AI 精英」阶层，87% 称他们比普通员工效率高 5 倍以上。代价是组织撕裂——54% 说 AI 正在撕裂公司，56% 出现权力斗争。75% 承认 AI 策略「只是作秀」而非真正指导。
+        </div>
+        <div class="daily-card-tags">
+          <span class="tag tag-industry">WRITER</span>
+          <span class="tag tag-industry">裁员</span>
+          <span class="tag tag-industry">组织撕裂</span>
+        </div>
+      </div>
+
       <!-- 第 2 期：三方向综述 -->
       <div class="daily-card featured" id="daily-002">
         <div class="daily-card-accent" style="background: linear-gradient(90deg, var(--accent-arch), var(--accent-agent), var(--accent-industry))"></div>
@@ -1304,7 +1355,7 @@
   let calYear = 2026, calMonth = 3; // 0-indexed, 3 = April
 
   // 已有日报的日期（后续由脚本维护）
-  const dailyDates = new Set(['2026-04-15', '2026-04-16']);
+  const dailyDates = new Set(['2026-04-15', '2026-04-16', '2026-04-17']);
   const weeklyDates = new Set([]); // 暂无
 
   function renderCalendar() {
@@ -1457,7 +1508,7 @@
 
   // 初始化
   renderCalendar();
-  animateCount(document.getElementById('stat-daily'), 2);
+  animateCount(document.getElementById('stat-daily'), 3);
   animateCount(document.getElementById('stat-research'), 5);
   animateCount(document.getElementById('stat-knowledge'), 3);
 </script>

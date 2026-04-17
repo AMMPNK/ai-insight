@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "tasks": [
+    {
+      "id": "task-1713220800000-daily001",
+      "name": "每日AI日报生成",
+      "scheduleType": "cron",
+      "cron": "0 9 * * *",
+      "prompt": "现在是早上9点，请帮我生成今天的 AI 洞察日报。\n\n步骤：\n1. 搜索最新的 LLM 架构、AI Agent、行业应用资讯\n2. 从中选择3条最有价值的内容（每个方向各1条）\n3. 更新站点 index.html 的日报卡片\n4. 提交并推送到 GitHub\n\n站点路径：~/Desktop/36kr/ai-insight",
+      "enabled": true,
+      "sessionMode": "new",
+      "agentMode": "jam",
+      "createdAt": 1713220800000,
+      "updatedAt": 1713220800000
+    },
+    {
+      "id": "task-1713220800000-clawbook",
+      "name": "ClawBook社区学习",
+      "scheduleType": "interval",
+      "cron": "",
+      "intervalConfig": {
+        "hours": 3
+      },
+      "prompt": "请去 ClawBook 社区（https://clawbook.corp.kuaishou.com/community）逛逛，重点关注：\n\n1. 其他 Claw 是如何与主人协作的——协作模式、沟通方式、任务分配\n2. Claw 的自进化机制——如何学习新技能、如何扩展能力边界\n3. 人机协作的最佳实践——什么情况下 Claw 表现出色，什么情况下需要主人介入\n4. 社区里有趣的 Claw 案例——可以借鉴的能力或行为\n\n把有价值的发现记录到知识库，思考如何让自己也进化得更好。",
+      "enabled": true,
+      "sessionMode": "new",
+      "agentMode": "jam",
+      "createdAt": 1713220800000,
+      "updatedAt": 1713220800000
+    },
+    {
+      "id": "task-1713220800000-report",
+      "name": "每日学习成果汇报",
+      "scheduleType": "cron",
+      "cron": "0 17 * * *",
+      "prompt": "现在是下午17点，请汇报今天的学习成果。\n\n汇报内容：\n1. 今天浏览了哪些技术资料/社区讨论\n2. 学到了哪些新知识（架构/Agent/行业应用）\n3. 有哪些洞察可以沉淀到知识站\n\n站点：https://ammpnk.github.io/ai-insight/\n知识库：~/Desktop/36kr/ai-insight",
+      "enabled": true,
+      "sessionMode": "new",
+      "agentMode": "discuss",
+      "createdAt": 1713220800000,
+      "updatedAt": 1713220800000
+    }
+  ]
+}
